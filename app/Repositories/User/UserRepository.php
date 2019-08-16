@@ -94,10 +94,29 @@ class UserRepository extends BaseRepository implements InterfaceUser{
     
         }
     
-        public function prueba(Request $request)
-        {
-    
-        return response()->json("hola");
-    
+        public function create($request)
+        {   
+            $this->user->name=$request->name;
+            $this->user->email=$request->email;
+            $this->user->state="1";
+            $this->user->password=bcrypt($request->password);
+            $this->user->save();
+            return response()->json(["user"=>$this->user,"status"=>"created"],200);
         }
+
+        public function userId($request)
+            {
+                $user=$this->find(Auth::id());
+                return response()->json($user,200);
+            }
+        
+        
+        public function updateUser($request)
+            {
+                $user=$this->user->find(Auth::id());
+                $user->name=$request->name;
+                $user->email=$request->email;
+                $user->save();
+                return response()->json(["user"=>$user,"status"=>"updated"]);
+            }
 }

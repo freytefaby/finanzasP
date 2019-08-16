@@ -3,6 +3,8 @@
 /public/storage
 /storage/*.key
 /vendor
+/database/seeds/oauth_clientsSeeder.php
+/database/seeds/oauth_personal_access_clientsSeeder.php
 .env
 .env.backup
 .phpunit.result.cache

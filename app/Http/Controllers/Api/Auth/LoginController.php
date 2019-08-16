@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Api\Auth;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Repositories\User\InterfaceUser;
-use App\User;
+
 
 class LoginController extends Controller
 {
@@ -24,20 +24,11 @@ class LoginController extends Controller
      return $user;
     }
 
-    public function refresh(Request $request)
-    {
-       
-    }
+   
     public function logout()
     {
         $user=$this->userRepo->Logout();
         return $user;
     }
 
-    public function prueba(Request $request)
-    {
-
-    
-
-    }
 }

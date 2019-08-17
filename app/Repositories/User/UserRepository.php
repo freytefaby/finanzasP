@@ -28,12 +28,14 @@ class UserRepository extends BaseRepository implements InterfaceUser{
 
     public function Login($request)
         {
+
+
             $validator=\Validator::make($request->all(),[
                 'username'=>'required',
                 'password'=>'required|min:6',
 
             ]);
-
+                    
             if($validator->fails())
                 {
                     return response()->json($errors=$validator->errors(),400);
@@ -52,6 +54,8 @@ class UserRepository extends BaseRepository implements InterfaceUser{
                         ];
 
                         $request->request->add($params);
+
+                        
                         $proxy=Request::create('oauth/token','POST');
                             return Route::dispatch($proxy);
                     }
@@ -97,11 +101,11 @@ class UserRepository extends BaseRepository implements InterfaceUser{
         public function create($request)
         {   
             $this->user->name=$request->name;
-            $this->user->email=$request->email;
+            $this->user->email=$request->username;
             $this->user->state="1";
             $this->user->password=bcrypt($request->password);
             $this->user->save();
-            return response()->json(["user"=>$this->user,"status"=>"created"],200);
+            return response()->json(["user"=>$this->user,"token"=>$token,"status"=>"created"],200);
         }
 
         public function userId($request)
@@ -117,6 +121,11 @@ class UserRepository extends BaseRepository implements InterfaceUser{
                 $user->name=$request->name;
                 $user->email=$request->email;
                 $user->save();
-                return response()->json(["user"=>$user,"status"=>"updated"]);
+                return response()->json(["user"=>$user,"status"=>"updated"],200);
+            }
+
+        public function updatePass($request)
+            {
+                return "hola";
             }
 }

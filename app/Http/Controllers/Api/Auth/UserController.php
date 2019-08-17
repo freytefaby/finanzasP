@@ -29,4 +29,9 @@ class UserController extends Controller
         {
            return $this->userRepo->updateUser($request);
         }
+
+    public function updatePass()
+        {
+           return $this->userRepo->updatePass('hola');
+        }
 }

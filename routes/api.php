@@ -17,15 +17,16 @@ Route::middleware(['auth:api'])->group(function () {
 Route::post('logout', 'Api\Auth\LoginController@logout');
 
 /********************* USERS ********************** */
-Route::post('UsersCreate', 'Api\Auth\UserController@create');
 Route::post('UserId', 'Api\Auth\UserController@userId');
 Route::post('UserUpdate', 'Api\Auth\UserController@update');
+Route::post('UserPass', 'Api\Auth\UserController@updatePass');
 
 
 });
 
 /*********************RUTAS SIN PROTECCION DE TOKENS********************** */
 Route::post('login', 'Api\Auth\LoginController@login');
+Route::post('UsersCreate', 'Api\Auth\UserController@create');
 
 
 

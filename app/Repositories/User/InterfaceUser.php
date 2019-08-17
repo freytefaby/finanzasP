@@ -7,4 +7,5 @@ interface InterfaceUser{
     public function create($data);
     public function userId($data);
     public function updateUser($data);
+    public function updatePass($daga);
 }

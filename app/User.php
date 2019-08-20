@@ -5,6 +5,7 @@ namespace App;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use App\TipoMovimiento;
 
 //passport
 use Laravel\Passport\HasApiTokens;
@@ -41,8 +42,8 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function movement()
+    public function typeMovement()
         {
-            return $this->hasMany(movimiento::class,'id_user');
+            return $this->belongsToMany(TipoMovimiento::class,'movimientos','id_user','id_tipo_movimiento')->withPivot('descripcion','value','state');
         }
 }

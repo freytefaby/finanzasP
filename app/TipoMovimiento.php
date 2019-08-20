@@ -6,6 +6,7 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Laravel\Passport\HasApiTokens;
+use App\User;
 
 class TipoMovimiento extends Authenticatable
 {
@@ -20,10 +21,10 @@ class TipoMovimiento extends Authenticatable
 
     ];
 
-    public function movement()
-        {
-            return $this->hasMany(movimiento::class,'id_tipo_movimiento');
-        }
+    public function users()
+    {
+        return $this->belongsToMany(User::class,'movimientos','id_user','id_tipo_movimiento')->withPivot('descripcion','value','state');
+    }
 
         public function scopeSearch($query, $search, $parameter)
         {

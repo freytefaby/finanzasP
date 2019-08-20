@@ -24,14 +24,19 @@ class MovementRepository extends BaseRepository implements InterfaceMovement{
 
     public function index($request)
         {
+
+            
+            
            $movimiento=$this->movement::search($request->search,$request->parameter)
+                                       ->date($request->date1,$request->date2)
+                                       ->state($request->state)
                                        ->select('movimientos.id','u.name','t.descripcion','t.tipo','movimientos.descripcion as descrip','movimientos.value','movimientos.created_at','movimientos.state')
                                        ->where('id_user',Auth::id())
                                        ->join('users as u','u.id','movimientos.id_user')
                                        ->join('tipo_movimiento as t','t.id','movimientos.id_tipo_movimiento')
                                        ->paginate();
 
-            $patrimonio=$this->patrimonio::where('id_user',Auth::id())->first();                        
+           $patrimonio=$this->patrimonio::where('id_user',Auth::id())->first();                        
                            
 
            return response()->json(["patrimonio"=>$patrimonio,"movimiento"=>$movimiento],200);

@@ -20,7 +20,8 @@ class CreateMovimientosTable extends Migration
             $table->unsignedBigInteger('id_tipo_movimiento');
             $table->foreign('id_tipo_movimiento','fk_tipoMovimiento')->references('id')->on('tipo_movimiento')->onDelete('restrict')->onUpdate('restrict');
             $table->string('descripcion',200);
-            $table->integer('value');     
+            $table->integer('value');
+            $table->boolean('state');     
             $table->timestamps();
         });
     }

@@ -105,7 +105,7 @@ class UserRepository extends BaseRepository implements InterfaceUser{
             $this->user->state="1";
             $this->user->password=bcrypt($request->password);
             $this->user->save();
-            return response()->json(["user"=>$this->user,"token"=>$token,"status"=>"created"],200);
+            return response()->json(["user"=>$this->user,"status"=>"created"],200);
         }
 
         public function userId($request)
@@ -126,6 +126,9 @@ class UserRepository extends BaseRepository implements InterfaceUser{
 
         public function updatePass($request)
             {
-                return "hola";
+                $user=$this->user->find(Auth::id());
+                $user->password=bcrypt($request->password);
+                $user->save();
+                return response()->json(["user"=>$user,"status"=>"updated"],200);
             }
 }

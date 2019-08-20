@@ -7,35 +7,29 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Laravel\Passport\HasApiTokens;
 
-class Movimiento extends Authenticatable
+class TipoMovimiento extends Authenticatable
 {
     use Notifiable, HasApiTokens;
-    protected $table='movimientos';
+    protected $table='tipo_movimiento';
     protected $fillable=[
-        'id_user',
-        'id_tipo_movimiento',
         'descripcion',
-        'value'
+        'tipo',
+        
     ];
     protected $guarded=[
 
     ];
 
-    public function user()
+    public function movement()
         {
-            $this->belongsTo(User::class);
+            return $this->hasMany(movimiento::class,'id_tipo_movimiento');
         }
 
-        public function typeMovement()
-        {
-            $this->belongsTo(TipoMovimiento::class);
-        }
-
-    public function scopeSearch($query, $search, $parameter)
+        public function scopeSearch($query, $search, $parameter)
         {
             if(trim($search) != "" && trim($parameter) != "")
             {
-                if($parameter === "movimientos.descripcion" || $parameter === "u.name" || $parameter === "u.name" )
+                if($parameter === "descripcion" || $parameter === "tipo")
                     {
                         $query->where($parameter,'like','%'.$search.'%');
                     }
@@ -43,8 +37,6 @@ class Movimiento extends Authenticatable
             }
            
         }
-
-        
 
     
 }

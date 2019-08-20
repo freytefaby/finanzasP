@@ -15,7 +15,8 @@ class movimientosSeeder extends Seeder
             'id_user'=>1,
             'id_tipo_movimiento'=>1,
             'descripcion'=>'nothing',
-            'value'=>0
+            'value'=>0,
+            'state'=>1
         ]);
     }
 }

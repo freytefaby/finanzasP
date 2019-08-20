@@ -19,7 +19,19 @@ Route::post('logout', 'Api\Auth\LoginController@logout');
 /********************* USERS ********************** */
 Route::post('UserId', 'Api\Auth\UserController@userId');
 Route::post('UserUpdate', 'Api\Auth\UserController@update');
-Route::post('UserPass', 'Api\Auth\UserController@updatePass');
+Route::post('UserPassUpdate', 'Api\Auth\UserController@updatePass');
+
+/********************* TIPO MOVIMIENTO ********************** */
+Route::get('TypeMovement', 'Api\Auth\tipoMovimientoController@index');
+Route::get('TypeMovementId/{id}', 'Api\Auth\tipoMovimientoController@findId');
+Route::post('TypeMovementCreate', 'Api\Auth\tipoMovimientoController@create');
+Route::post('TypeMovementUpdate', 'Api\Auth\tipoMovimientoController@update');
+
+/*********************MOVIMIENTO ********************** */
+Route::get('Movement', 'Api\Auth\MovementController@index');
+
+
+
 
 
 });

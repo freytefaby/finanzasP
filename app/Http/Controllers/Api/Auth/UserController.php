@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Repositories\User\InterfaceUser;
 use App\Http\Requests\userC;
 use App\Http\Requests\userU;
+use App\Http\Requests\userResetPassword;
 
 
 class UserController extends Controller
@@ -30,8 +31,8 @@ class UserController extends Controller
            return $this->userRepo->updateUser($request);
         }
 
-    public function updatePass()
+    public function updatePass(userResetPassword $request)
         {
-           return $this->userRepo->updatePass('hola');
+           return $this->userRepo->updatePass($request);
         }
 }
